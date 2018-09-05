@@ -1,0 +1,31 @@
+{%  extends 'layout.html' %}
+{% block heading %}
+    Vigenère cipher
+{% endblock %}
+{% block body %}
+    {% if gf %}
+          <form action="{{ url_for("vigener_d") }}" method="post">
+            <div class="form-group">
+                <label for="exampleFormControlInput1"><h6>Plaintext</h6></label>
+                <input type="text" name="pt" class="form-control" id="exampleFormControlInput1" placeholder="Input here" required><br>
+                <label for="exampleFormControlInput1"><h6>Ciphertext</h6></label>
+                <input type="text" name="ct" class="form-control" id="exampleFormControlInput1" placeholder="Input here" required><br>
+                <label for="exampleFormControlInput1"><h6>Key</h6></label>
+                <input type="text" name="key" class="form-control" id="exampleFormControlInput1" placeholder="Should be a string" required><br>
+                <button class="btn btn-outline-success">Submit</button>
+                <a href="{{ url_for("main") }}"><button type="button" class="btn btn-outline-primary">Go back</button></a>
+            </div>
+        </form>
+    {% else %}
+        <div class="row">
+            <div class="col">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Ciphertext : {{ nc.get_ciphertext() }} </li>
+                    <li class="list-group-item">Key: {{ nc.get_start_key() }} </li>
+                    <li class="list-group-item">Decrypted text: {{ nc.decryption() }}</li>
+                </ul>
+                <br><a href="{{ url_for("main") }}"><button type="button" class="btn btn-outline-primary">Go back</button></a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
